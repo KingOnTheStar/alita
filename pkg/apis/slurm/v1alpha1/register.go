@@ -22,8 +22,8 @@ import (
 )
 
 const (
-	CustomResourceGroup = "slurm.alita.io"
-        GroupName           = "slurm.alita.io"
+	CustomResourceGroup = "slurm"
+        GroupName           = "slurm"
 	Version             = "v1alpha1"
 )
 

@@ -21,7 +21,7 @@ package v1alpha1
 import (
 	time "time"
 
-	slurmalitaiov1alpha1 "github.com/alita/alita/pkg/apis/slurm.alita.io/v1alpha1"
+	slurmv1alpha1 "github.com/alita/alita/pkg/apis/slurm/v1alpha1"
 	versioned "github.com/alita/alita/pkg/client/clientset/versioned"
 	internalinterfaces "github.com/alita/alita/pkg/client/informers/externalversions/internalinterfaces"
 	v1alpha1 "github.com/alita/alita/pkg/client/listers/slurm/v1alpha1"
@@ -55,7 +55,7 @@ func NewClusterInformer(client versioned.Interface, namespace string, resyncPeri
 				return client.SlurmV1alpha1().Clusters(namespace).Watch(options)
 			},
 		},
-		&slurmalitaiov1alpha1.Cluster{},
+		&slurmv1alpha1.Cluster{},
 		resyncPeriod,
 		indexers,
 	)
@@ -66,7 +66,7 @@ func defaultClusterInformer(client versioned.Interface, resyncPeriod time.Durati
 }
 
 func (f *clusterInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&slurmalitaiov1alpha1.Cluster{}, defaultClusterInformer)
+	return f.factory.InformerFor(&slurmv1alpha1.Cluster{}, defaultClusterInformer)
 }
 
 func (f *clusterInformer) Lister() v1alpha1.ClusterLister {

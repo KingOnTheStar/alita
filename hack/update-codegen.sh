@@ -31,11 +31,11 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-ge
 cd ${SCRIPT_ROOT}
 ${CODEGEN_PKG}/generate-groups.sh "all" \
  github.com/alita/alita/pkg/client github.com/alita/alita/pkg/apis \
- slurm.alita.io:v1alpha1 \
+ slurm:v1alpha1 \
  --go-header-file hack/boilerplate/boilerplate.go.txt
 
 echo "Generating defaulters for v1alpha2"
-${GOPATH}/bin/defaulter-gen  --input-dirs github.com/alita/alita/pkg/apis/slurm.alita.io/v1alpha1 -O zz_generated.defaults --go-header-file hack/boilerplate/boilerplate.go.txt "$@"
+${GOPATH}/bin/defaulter-gen  --input-dirs github.com/alita/alita/pkg/apis/slurm/v1alpha1 -O zz_generated.defaults --go-header-file hack/boilerplate/boilerplate.go.txt "$@"
 cd - > /dev/null
 
 #echo "Generating OpenAPI specification for v1alpha2"

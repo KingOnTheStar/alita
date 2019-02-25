@@ -17,7 +17,7 @@
 package v1alpha1
 
 import (
-	v1alpha1 "github.com/alita/alita/pkg/apis/slurm.alita.io/v1alpha1"
+	v1alpha1 "github.com/alita/alita/pkg/apis/slurm/v1alpha1"
 	"github.com/alita/alita/pkg/client/clientset/versioned/scheme"
 	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
 	rest "k8s.io/client-go/rest"
@@ -28,7 +28,7 @@ type SlurmV1alpha1Interface interface {
 	ClustersGetter
 }
 
-// SlurmV1alpha1Client is used to interact with features provided by the slurm.alita.io group.
+// SlurmV1alpha1Client is used to interact with features provided by the slurm group.
 type SlurmV1alpha1Client struct {
 	restClient rest.Interface
 }

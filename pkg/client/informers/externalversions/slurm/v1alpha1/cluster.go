@@ -1,4 +1,4 @@
-// Copyright 2019 The Kubeflow Authors
+// Copyright 2019 The Alita Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import (
 	slurmalitaiov1alpha1 "github.com/alita/alita/pkg/apis/slurm.alita.io/v1alpha1"
 	versioned "github.com/alita/alita/pkg/client/clientset/versioned"
 	internalinterfaces "github.com/alita/alita/pkg/client/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/alita/alita/pkg/client/listers/ceph/v1alpha1"
+	v1alpha1 "github.com/alita/alita/pkg/client/listers/slurm/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -49,10 +49,10 @@ func NewClusterInformer(client versioned.Interface, namespace string, resyncPeri
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options v1.ListOptions) (runtime.Object, error) {
-				return client.CephV1alpha1().Clusters(namespace).List(options)
+				return client.SlurmV1alpha1().Clusters(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
-				return client.CephV1alpha1().Clusters(namespace).Watch(options)
+				return client.SlurmV1alpha1().Clusters(namespace).Watch(options)
 			},
 		},
 		&slurmalitaiov1alpha1.Cluster{},

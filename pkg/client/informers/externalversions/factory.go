@@ -1,4 +1,4 @@
-// Copyright 2019 The Kubeflow Authors
+// Copyright 2019 The Alita Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import (
 	time "time"
 
 	versioned "github.com/alita/alita/pkg/client/clientset/versioned"
-	ceph "github.com/alita/alita/pkg/client/informers/externalversions/ceph"
 	internalinterfaces "github.com/alita/alita/pkg/client/informers/externalversions/internalinterfaces"
+	slurm "github.com/alita/alita/pkg/client/informers/externalversions/slurm"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
@@ -111,9 +111,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Ceph() ceph.Interface
+	Slurm() slurm.Interface
 }
 
-func (f *sharedInformerFactory) Ceph() ceph.Interface {
-	return ceph.New(f)
+func (f *sharedInformerFactory) Slurm() slurm.Interface {
+	return slurm.New(f)
 }

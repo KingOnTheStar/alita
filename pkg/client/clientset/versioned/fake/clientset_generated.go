@@ -1,4 +1,4 @@
-// Copyright 2019 The Kubeflow Authors
+// Copyright 2019 The Alita Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package fake
 
 import (
 	clientset "github.com/alita/alita/pkg/client/clientset/versioned"
-	cephv1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/ceph/v1alpha1"
-	fakecephv1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/ceph/v1alpha1/fake"
+	slurmv1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/slurm/v1alpha1"
+	fakeslurmv1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/slurm/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -60,12 +60,12 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 
 var _ clientset.Interface = &Clientset{}
 
-// CephV1alpha1 retrieves the CephV1alpha1Client
-func (c *Clientset) CephV1alpha1() cephv1alpha1.CephV1alpha1Interface {
-	return &fakecephv1alpha1.FakeCephV1alpha1{Fake: &c.Fake}
+// SlurmV1alpha1 retrieves the SlurmV1alpha1Client
+func (c *Clientset) SlurmV1alpha1() slurmv1alpha1.SlurmV1alpha1Interface {
+	return &fakeslurmv1alpha1.FakeSlurmV1alpha1{Fake: &c.Fake}
 }
 
-// Ceph retrieves the CephV1alpha1Client
-func (c *Clientset) Ceph() cephv1alpha1.CephV1alpha1Interface {
-	return &fakecephv1alpha1.FakeCephV1alpha1{Fake: &c.Fake}
+// Slurm retrieves the SlurmV1alpha1Client
+func (c *Clientset) Slurm() slurmv1alpha1.SlurmV1alpha1Interface {
+	return &fakeslurmv1alpha1.FakeSlurmV1alpha1{Fake: &c.Fake}
 }

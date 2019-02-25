@@ -23,16 +23,9 @@ import (
 
 const (
 	CustomResourceGroup = "slurm.alita.io"
+        GroupName           = "slurm.alita.io"
 	Version             = "v1alpha1"
 )
-
-// SchemeGroupVersion is group version used to register these objects
-var SchemeGroupVersion = schema.GroupVersion{Group: cephrookio.GroupName, Version: Version}
-
-// Resource takes an unqualified resource and returns a Group qualified GroupResource
-func Resource(resource string) schema.GroupResource {
-	return SchemeGroupVersion.WithResource(resource).GroupResource()
-}
 
 var (
 	// SchemeBuilder and AddToScheme will stay in k8s.io/kubernetes.
@@ -41,6 +34,9 @@ var (
 	AddToScheme        = localSchemeBuilder.AddToScheme
 )
 
+// SchemeGroupVersion is group version used to register these objects
+var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: Version}
+
 func init() {
 	// We only register manually written functions here. The registration of the
 	// generated functions takes place in the generated files. The separation
@@ -48,19 +44,16 @@ func init() {
 	localSchemeBuilder.Register(addKnownTypes)
 }
 
+// Resource takes an unqualified resource and returns a Group qualified GroupResource
+func Resource(resource string) schema.GroupResource {
+	return SchemeGroupVersion.WithResource(resource).GroupResource()
+}
+
 // Adds the list of known types to api.Scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&Cluster{},
 		&ClusterList{},
-		&Pool{},
-		&PoolList{},
-		&Filesystem{},
-		&FilesystemList{},
-		&ObjectStore{},
-		&ObjectStoreList{},
-		&ObjectStoreUser{},
-		&ObjectStoreUserList{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

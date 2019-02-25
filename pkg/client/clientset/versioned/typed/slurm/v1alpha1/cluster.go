@@ -1,4 +1,4 @@
-// Copyright 2019 The Kubeflow Authors
+// Copyright 2019 The Alita Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ type clusters struct {
 }
 
 // newClusters returns a Clusters
-func newClusters(c *CephV1alpha1Client, namespace string) *clusters {
+func newClusters(c *SlurmV1alpha1Client, namespace string) *clusters {
 	return &clusters{
 		client: c.RESTClient(),
 		ns:     namespace,

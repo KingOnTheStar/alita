@@ -22,8 +22,8 @@ import (
 )
 
 const (
-	CustomResourceGroup = "slurm"
-        GroupName           = "slurm"
+	CustomResourceGroup = "cluster"
+	GroupName           = "cluster"
 	Version             = "v1alpha1"
 )
 

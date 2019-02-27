@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package scheduler
+package cluster
 
 import (
 	"fmt"
@@ -27,16 +27,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const containerName = "alita-scheduler-operator"
+const containerName = "alita-cluster-operator"
 
 var operatorCmd = &cobra.Command{
 	Use:   "operator",
-	Short: "Runs alita-scheduler for non-native HPC workload management system in kubernetes clusters",
-	Long: `Runs alita-scheduler for non-native HPC workload management system in kubernetes clusters`,
+	Short: "Runs alita-cluster for non-native HPC workload management system in kubernetes clusters",
+	Long: `Runs alita-cluster for non-native HPC workload management system in kubernetes clusters`,
 }
 
 func init() {
-	flags.SetFlagsFromEnv(operatorCmd.Flags(), rook.RookEnvVarPrefix)
+	flags.SetFlagsFromEnv(operatorCmd.Flags(), rook.AlitaEnvVarPrefix)
 	flags.SetLoggingFlags(operatorCmd.Flags())
 
 	operatorCmd.RunE = startOperator
@@ -51,7 +51,7 @@ func startOperator(cmd *cobra.Command, args []string) error {
 		rook.TerminateFatal(fmt.Errorf("failed to get k8s clients. %+v\n", err))
 	}
 
-	logger.Infof("starting scheduler operator")
+	logger.Infof("starting cluster operator")
 	context := createContext()
 	context.NetworkInfo = clusterd.NetworkInfo{}
 	context.ConfigDir = k8sutil.DataDir

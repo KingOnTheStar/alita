@@ -18,7 +18,7 @@ package alita
 import (
 	"fmt"
 
-	"github.com/alita/alita/cmd/alita/scheduler"
+	"github.com/alita/alita/cmd/alita/cluster"
 	"github.com/alita/alita/cmd/alita/slurm"
 	alita "github.com/alita/alita/cmd/alita/alita"
 	"github.com/alita/alita/cmd/alita/version"

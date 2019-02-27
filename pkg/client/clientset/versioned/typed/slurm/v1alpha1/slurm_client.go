@@ -17,7 +17,7 @@
 package v1alpha1
 
 import (
-	v1alpha1 "github.com/alita/alita/pkg/apis/slurm/v1alpha1"
+	v1alpha1 "github.com/alita/alita/pkg/apis/cluster/v1alpha1"
 	"github.com/alita/alita/pkg/client/clientset/versioned/scheme"
 	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
 	rest "k8s.io/client-go/rest"

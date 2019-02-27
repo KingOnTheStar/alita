@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package scheduler
+package cluster
 
 import (
 	"github.com/coreos/pkg/capnslog"
@@ -26,12 +26,12 @@ import (
 )
 
 var Cmd = &cobra.Command{
-	Use:   "scheduler",
-	Short: "Main command for scheduler operator and daemons.",
+	Use:   "cluster",
+	Short: "Main command for cluster controller and scheduler operator and daemons.",
 }
 
 var (
-	logger = capnslog.NewPackageLogger("github.com/alita/alita", "schedulercmd")
+	logger = capnslog.NewPackageLogger("github.com/alita/alita", "clustercmd")
 )
 
 func init() {

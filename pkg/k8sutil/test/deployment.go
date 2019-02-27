@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/rook/rook/pkg/clusterd"
+	"github.com/alita/alita/pkg/clusterd"
 	apps "k8s.io/api/apps/v1"
 )
 

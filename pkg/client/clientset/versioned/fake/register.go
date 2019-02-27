@@ -17,7 +17,7 @@
 package fake
 
 import (
-	slurmv1alpha1 "github.com/alita/alita/pkg/apis/slurm/v1alpha1"
+	slurmv1alpha1 "github.com/alita/alita/pkg/apis/cluster/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

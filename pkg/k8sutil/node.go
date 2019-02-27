@@ -20,7 +20,7 @@ package k8sutil
 import (
 	"fmt"
 
-	rookalpha "github.com/rook/rook/pkg/apis/rook.io/v1alpha2"
+	rookalpha "github.com/alita/alita/pkg/apis/cluster/v1alpha1"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"

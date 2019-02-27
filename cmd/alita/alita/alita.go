@@ -27,25 +27,25 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 
-	rookclient "github.com/rook/rook/pkg/client/clientset/versioned"
-	"github.com/rook/rook/pkg/util/flags"
-	"github.com/rook/rook/pkg/version"
+	alitaclient "github.com/alita/alita/pkg/client/clientset/versioned"
+	"github.com/alita/alita/pkg/util/flags"
+	"github.com/alita/alita/pkg/version"
 	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 )
 
 const (
-	RookEnvVarPrefix = "ROOK"
+	RookEnvVarPrefix = "ALITA"
 	terminationLog   = "/dev/termination-log"
 )
 
 var RootCmd = &cobra.Command{
-	Use: "rook",
+	Use: "alita",
 }
 
 var (
 	logLevelRaw string
 	Cfg         = &Config{}
-	logger      = capnslog.NewPackageLogger("github.com/rook/rook", "rookcmd")
+	logger      = capnslog.NewPackageLogger("github.com/alita/alita", "alitacmd")
 )
 
 type Config struct {
@@ -60,8 +60,8 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&logLevelRaw, "log-level", "INFO", "logging level for logging/tracing output (valid values: CRITICAL,ERROR,WARNING,NOTICE,INFO,DEBUG,TRACE)")
 
 	// load the environment variables
-	flags.SetFlagsFromEnv(RootCmd.Flags(), RookEnvVarPrefix)
-	flags.SetFlagsFromEnv(RootCmd.PersistentFlags(), RookEnvVarPrefix)
+	flags.SetFlagsFromEnv(RootCmd.Flags(), AlitaEnvVarPrefix)
+	flags.SetFlagsFromEnv(RootCmd.PersistentFlags(), AlitaEnvVarPrefix)
 }
 
 // SetLogLevel set log level based on provided log option.
@@ -79,12 +79,12 @@ func SetLogLevel() {
 func LogStartupInfo(cmdFlags *pflag.FlagSet) {
 
 	flagValues := flags.GetFlagsAndValues(cmdFlags, "secret|keyring")
-	logger.Infof("starting Rook %s with arguments '%s'", version.Version, strings.Join(os.Args, " "))
+	logger.Infof("starting Alita %s with arguments '%s'", version.Version, strings.Join(os.Args, " "))
 	logger.Infof("flag values: %s", strings.Join(flagValues, ", "))
 }
 
 // GetClientset create the k8s client
-func GetClientset() (kubernetes.Interface, apiextensionsclient.Interface, rookclient.Interface, error) {
+func GetClientset() (kubernetes.Interface, apiextensionsclient.Interface, alitaclient.Interface, error) {
 	config, err := rest.InClusterConfig()
 	if err != nil {
 		return nil, nil, nil, fmt.Errorf("failed to get k8s config. %+v", err)
@@ -98,11 +98,11 @@ func GetClientset() (kubernetes.Interface, apiextensionsclient.Interface, rookcl
 	if err != nil {
 		return nil, nil, nil, fmt.Errorf("failed to create k8s API extension clientset. %+v", err)
 	}
-	rookClientset, err := rookclient.NewForConfig(config)
+	alitaClientset, err := alitaclient.NewForConfig(config)
 	if err != nil {
 		return nil, nil, nil, fmt.Errorf("failed to create rook clientset. %+v", err)
 	}
-	return clientset, apiExtClientset, rookClientset, nil
+	return clientset, apiExtClientset, alitaClientset, nil
 }
 
 // TerminateFatal terminates the process with an exit code of 1 and writes the given reason to stderr and // the termination log file.

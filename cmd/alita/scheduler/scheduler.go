@@ -20,18 +20,18 @@ import (
 	"github.com/coreos/pkg/capnslog"
 	"github.com/spf13/cobra"
 
-	"github.com/rook/rook/cmd/rook/rook"
-	"github.com/rook/rook/pkg/clusterd"
-	"github.com/rook/rook/pkg/util/exec"
+	"github.com/alita/alita/cmd/alita/alita"
+	"github.com/alita/alita/pkg/clusterd"
+	"github.com/alita/alita/pkg/util/exec"
 )
 
 var Cmd = &cobra.Command{
 	Use:   "scheduler",
-	Short: "Main command for NFS operator and daemons.",
+	Short: "Main command for scheduler operator and daemons.",
 }
 
 var (
-	logger = capnslog.NewPackageLogger("github.com/rook/rook", "nfscmd")
+	logger = capnslog.NewPackageLogger("github.com/alita/alita", "schedulercmd")
 )
 
 func init() {

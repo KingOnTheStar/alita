@@ -47,7 +47,7 @@ type ClusterList struct {
 
 type ClusterSpec struct {
 	// The version information that instructs Rook to orchestrate a particular version of Ceph.
-	SlurmVersion SlurmVersionSpec `json:"slurmVersion,omitempty"`
+	Version VersionSpec `json:"version,omitempty"`
 
 	// A spec for available storage in the cluster and how it should be used
 	Pool PoolSpec `json:"pool,omitempty"`
@@ -57,7 +57,7 @@ type ClusterSpec struct {
 }
 
 // VersionSpec represents the settings for the Ceph version that Rook is orchestrating.
-type SlurmVersionSpec struct {
+type VersionSpec struct {
 	// Image is the container image used to launch the ceph daemons, such as ceph/ceph:v12.2.7 or ceph/ceph:v13.2.1
 	Image string `json:"image,omitempty"`
 

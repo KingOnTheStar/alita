@@ -30,7 +30,8 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-ge
 #                  instead of the $GOPATH directly. For normal projects this can be dropped.
 cd ${SCRIPT_ROOT}
 ${CODEGEN_PKG}/generate-groups.sh "all" \
- github.com/alita/alita/pkg/client github.com/alita/alita/pkg/apis \
+ github.com/alita/alita/pkg/client \
+ github.com/alita/alita/pkg/apis \
  cluster:v1alpha1 \
  --go-header-file hack/boilerplate/boilerplate.go.txt
 

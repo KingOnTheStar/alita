@@ -17,5 +17,5 @@ limitations under the License.
 // +k8s:deepcopy-gen=package,register
 
 // Package v1 is the v1 version of the API.
-// +groupName=slurm
+// +groupName=cluster
 package v1alpha1

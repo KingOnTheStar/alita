@@ -24,8 +24,8 @@ import (
 	time "time"
 
 	versioned "github.com/alita/alita/pkg/client/clientset/versioned"
+	cluster "github.com/alita/alita/pkg/client/informers/externalversions/cluster"
 	internalinterfaces "github.com/alita/alita/pkg/client/informers/externalversions/internalinterfaces"
-	slurm "github.com/alita/alita/pkg/client/informers/externalversions/slurm"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
@@ -111,9 +111,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Slurm() slurm.Interface
+	Cluster() cluster.Interface
 }
 
-func (f *sharedInformerFactory) Slurm() slurm.Interface {
-	return slurm.New(f)
+func (f *sharedInformerFactory) Cluster() cluster.Interface {
+	return cluster.New(f)
 }

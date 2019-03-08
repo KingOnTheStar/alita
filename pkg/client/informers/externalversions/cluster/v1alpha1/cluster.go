@@ -24,7 +24,7 @@ import (
 	clusterv1alpha1 "github.com/alita/alita/pkg/apis/cluster/v1alpha1"
 	versioned "github.com/alita/alita/pkg/client/clientset/versioned"
 	internalinterfaces "github.com/alita/alita/pkg/client/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/alita/alita/pkg/client/listers/slurm/v1alpha1"
+	v1alpha1 "github.com/alita/alita/pkg/client/listers/cluster/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -49,10 +49,10 @@ func NewClusterInformer(client versioned.Interface, namespace string, resyncPeri
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options v1.ListOptions) (runtime.Object, error) {
-				return client.SlurmV1alpha1().Clusters(namespace).List(options)
+				return client.ClusterV1alpha1().Clusters(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
-				return client.SlurmV1alpha1().Clusters(namespace).Watch(options)
+				return client.ClusterV1alpha1().Clusters(namespace).Watch(options)
 			},
 		},
 		&clusterv1alpha1.Cluster{},

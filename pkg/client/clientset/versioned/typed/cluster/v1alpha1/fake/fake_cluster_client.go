@@ -17,22 +17,22 @@
 package fake
 
 import (
-	v1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/slurm/v1alpha1"
+	v1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/cluster/v1alpha1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
 
-type FakeSlurmV1alpha1 struct {
+type FakeClusterV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeSlurmV1alpha1) Clusters(namespace string) v1alpha1.ClusterInterface {
+func (c *FakeClusterV1alpha1) Clusters(namespace string) v1alpha1.ClusterInterface {
 	return &FakeClusters{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *FakeSlurmV1alpha1) RESTClient() rest.Interface {
+func (c *FakeClusterV1alpha1) RESTClient() rest.Interface {
 	var ret *rest.RESTClient
 	return ret
 }

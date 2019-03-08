@@ -17,7 +17,7 @@
 package versioned
 
 import (
-	slurmv1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/slurm/v1alpha1"
+	clusterv1alpha1 "github.com/alita/alita/pkg/client/clientset/versioned/typed/cluster/v1alpha1"
 	glog "github.com/golang/glog"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
@@ -26,27 +26,27 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	SlurmV1alpha1() slurmv1alpha1.SlurmV1alpha1Interface
+	ClusterV1alpha1() clusterv1alpha1.ClusterV1alpha1Interface
 	// Deprecated: please explicitly pick a version if possible.
-	Slurm() slurmv1alpha1.SlurmV1alpha1Interface
+	Cluster() clusterv1alpha1.ClusterV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	slurmV1alpha1 *slurmv1alpha1.SlurmV1alpha1Client
+	clusterV1alpha1 *clusterv1alpha1.ClusterV1alpha1Client
 }
 
-// SlurmV1alpha1 retrieves the SlurmV1alpha1Client
-func (c *Clientset) SlurmV1alpha1() slurmv1alpha1.SlurmV1alpha1Interface {
-	return c.slurmV1alpha1
+// ClusterV1alpha1 retrieves the ClusterV1alpha1Client
+func (c *Clientset) ClusterV1alpha1() clusterv1alpha1.ClusterV1alpha1Interface {
+	return c.clusterV1alpha1
 }
 
-// Deprecated: Slurm retrieves the default version of SlurmClient.
+// Deprecated: Cluster retrieves the default version of ClusterClient.
 // Please explicitly pick a version.
-func (c *Clientset) Slurm() slurmv1alpha1.SlurmV1alpha1Interface {
-	return c.slurmV1alpha1
+func (c *Clientset) Cluster() clusterv1alpha1.ClusterV1alpha1Interface {
+	return c.clusterV1alpha1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -65,7 +65,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	}
 	var cs Clientset
 	var err error
-	cs.slurmV1alpha1, err = slurmv1alpha1.NewForConfig(&configShallowCopy)
+	cs.clusterV1alpha1, err = clusterv1alpha1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 // panics if there is an error in the config.
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
-	cs.slurmV1alpha1 = slurmv1alpha1.NewForConfigOrDie(c)
+	cs.clusterV1alpha1 = clusterv1alpha1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -91,7 +91,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.slurmV1alpha1 = slurmv1alpha1.New(c)
+	cs.clusterV1alpha1 = clusterv1alpha1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

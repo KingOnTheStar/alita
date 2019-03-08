@@ -78,7 +78,7 @@ func (c *ClusterController) StartWatch(namespace string, stopCh chan struct{}) e
 	}
 
 	logger.Infof("start watching cluster controller in namespace %s", namespace)
-	watcher := opkit.NewWatcher(ClusterResource, namespace, resourceHandlerFuncs, c.context.AlitaClientset.)
+	watcher := opkit.NewWatcher(ClusterResource, namespace, resourceHandlerFuncs, c.context.AlitaClientset.SlurmV1alpha1())
 	go watcher.Watch(&nfsv1alpha1.NFSServer{}, stopCh)
 
 	return nil

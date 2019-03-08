@@ -28,13 +28,13 @@ import (
 
 // FakeClusters implements ClusterInterface
 type FakeClusters struct {
-	Fake *FakeSlurmV1alpha1
+	Fake *FakeClusterV1alpha1
 	ns   string
 }
 
-var clustersResource = schema.GroupVersionResource{Group: "slurm", Version: "v1alpha1", Resource: "clusters"}
+var clustersResource = schema.GroupVersionResource{Group: "cluster", Version: "v1alpha1", Resource: "clusters"}
 
-var clustersKind = schema.GroupVersionKind{Group: "slurm", Version: "v1alpha1", Kind: "Cluster"}
+var clustersKind = schema.GroupVersionKind{Group: "cluster", Version: "v1alpha1", Kind: "Cluster"}
 
 // Get takes name of the cluster, and returns the corresponding cluster object, and an error if there is any.
 func (c *FakeClusters) Get(name string, options v1.GetOptions) (result *v1alpha1.Cluster, err error) {

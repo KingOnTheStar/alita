@@ -86,6 +86,21 @@ func (c *Controller) StartWatch(namespace string, stopCh chan struct{}) error {
 
 func (c *Controller) onAdd(obj interface{}) {
 	cluster := obj.(*clusterv1alpha1.Cluster).DeepCopy()
+	nodes, err := c.context.Clientset.CoreV1().Nodes().List(metav1.ListOptions{});
+	if err != nil {
+		return
+	}
+	for _, node := range nodes.Items {
+		hostname := node.Labels[apis.LabelHostname]
+		if !strings.HasPrefix(hostname, hostnameTestPrefix) {
+			node.Labels[apis.LabelHostname] = hostnameTestPrefix + hostname
+			logger.Infof("changed hostname of node %s to %s", node.Name, node.Labels[apis.LabelHostname])
+			_, err := k8sh.Clientset.CoreV1().Nodes().Update(&node)
+			if err != nil {
+				return
+			}
+		}
+	}
 	logger.Infof("cluster %s deleted from namespace %s", cluster.Name, cluster.Namespace)
 }
 
